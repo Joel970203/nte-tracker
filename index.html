@@ -370,6 +370,8 @@ tr.gift td { opacity: .5; }
   const category = (n) => { const m = (n || "").match(/^(캐릭터|아크|아이템|튜닝 부품|코스튬|글라이딩 날개)·/); return m ? m[1] : ""; };
   const isCostume = (n) => category(n) === "코스튬";
   const isDice = (n) => /주사위$/.test(short(n));
+  // items too common to mark on the journey bars
+  const noMarker = (n) => isDice(n) || short(n) === "탈차원 가물";
   const iconFile = (n) => ICONS[short(n)];
 
   let banner = "char", rankFilter = "all", page = 0;
@@ -409,7 +411,7 @@ tr.gift td { opacity: .5; }
     let journey = [];
     for (const p of pulls) {
       if (p.flag === 2) { pickups.push({ ...p, journey }); journey = []; }
-      else if (p.rank === "S" && !p.gift && !isDice(p.name)) journey.push(p);
+      else if (p.rank === "S" && !p.gift && !noMarker(p.name)) journey.push(p);
     }
     const counted = pulls.filter((p) => !p.gift);
     const vals = pickups.map((p) => p.pity);
