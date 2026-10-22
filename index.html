@@ -308,7 +308,7 @@ tr.gift td { opacity: .5; }
     <div class="pager"><button class="btn" type="button" id="prev">← 최근</button><span id="page-info" class="num"></span><button class="btn" type="button" id="next">이전 →</button></div>
   </section>
 
-  <p class="foot">천장 기준: 한정 보드 90회(70회부터 확률 상승), 연구 모집 80회, 표준 보드 72회(기록으로 추정). 포인트 선물로 받은 결과는 횟수에서 빠지고, 천장은 픽업 대상이 나올 때만 초기화돼요.<br>아이콘 출처: Icy Veins, Game8, GameWith · 개인용 비공식 팬 트래커</p>
+  <p class="foot">천장 기준: 한정·표준 보드 90회(70회부터 확률 상승), 연구 모집 80회. 픽뚫이 없어서 노란 캐릭터가 나오면 천장이 초기화돼요. 포인트 선물로 받은 결과는 횟수에서 빠져요.<br>아이콘 출처: Icy Veins, Game8, GameWith · 개인용 비공식 팬 트래커</p>
 </main>
 
 <script>
@@ -316,7 +316,7 @@ tr.gift td { opacity: .5; }
   const BANNERS = {
     char: { name: "한정 보드", hard: 90, soft: 70, pickupWord: "캐릭터" },
     arc: { name: "연구 모집", hard: 80, soft: null, pickupWord: "전용 아크" },
-    std: { name: "표준 보드", hard: 72, soft: null, pickupWord: "S급 캐릭터" },
+    std: { name: "표준 보드", hard: 90, soft: 70, pickupWord: "S급 캐릭터" },
   };
   const ICONS = {
     "나나리": "c-nanally.webp", "호토리": "c-hotori.webp", "라크리모사": "c-lacrimosa.webp", "카오스": "c-chaos.webp",
