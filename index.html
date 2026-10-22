@@ -308,7 +308,7 @@ tr.gift td { opacity: .5; }
     <div class="pager"><button class="btn" type="button" id="prev">← 최근</button><span id="page-info" class="num"></span><button class="btn" type="button" id="next">이전 →</button></div>
   </section>
 
-  <p class="foot">천장 기준: 한정·표준 보드 90회(70회부터 확률 상승), 연구 모집 80회. 픽뚫이 없어서 노란 캐릭터가 나오면 천장이 초기화돼요. 포인트 선물로 받은 결과는 횟수에서 빠져요.<br>아이콘 출처: Icy Veins, Game8, GameWith · 개인용 비공식 팬 트래커</p>
+  <p class="foot">천장 기준: 한정·표준 보드 90회(70회부터 확률 상승), 연구 모집 80회. 픽뚫이 없어서 노란 캐릭터가 나오면 천장이 초기화돼요. 포인트 선물과 안식의 땅 보너스는 뽑기가 아니라서 횟수에서 빠져요.<br>아이콘 출처: Icy Veins, Game8, GameWith · 개인용 비공식 팬 트래커</p>
 </main>
 
 <script>
@@ -364,7 +364,7 @@ tr.gift td { opacity: .5; }
     const pulls = [];
     let no = 0, pity = 0;
     for (const d of list) for (const [name, rank, time, flag] of d.items || []) {
-      const gift = flag === 1;
+      const gift = flag === 1 || flag === 3;
       if (!gift) { no++; pity++; }
       pulls.push({ name, rank, time, flag, gift, no: gift ? null : no, pity: gift ? null : pity });
       if (flag === 2) pity = 0;
@@ -494,7 +494,7 @@ tr.gift td { opacity: .5; }
     page = Math.max(0, Math.min(page, pages - 1));
     $("log-body").innerHTML = rows.slice(page * PAGE, page * PAGE + PAGE).map((p) => `
       <tr class="${p.rank}${p.gift ? " gift" : ""}">
-        <td class="num muted">${p.gift ? "선물" : p.no}</td>
+        <td class="num muted">${p.flag === 3 ? "보너스" : p.gift ? "선물" : p.no}</td>
         <td class="item"><span class="ic ${p.rank}">${img(p.name)}</span><span class="nm">${p.name ? esc(short(p.name)) : "일반 결과"}</span>${p.flag === 2 ? `<span class="pick">PICK UP</span>` : ""}</td>
         <td class="rk ${p.rank}">${p.rank}</td>
         <td class="num" style="color:${p.pity != null ? pityColor(p.pity, cfg.hard) : "var(--dim)"}">${p.pity ?? "–"}</td>
