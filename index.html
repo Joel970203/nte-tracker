@@ -30,6 +30,7 @@
   --orchid: #d98af0;
   --orchid-soft: rgba(217, 138, 240, .13);
   --steel: #7184ab;
+  --rose-prize: #ff6fc8;
   --cyan: #5fd2ea;
   --cyan-soft: rgba(95, 210, 234, .12);
   --good: #4fd394;
@@ -144,7 +145,29 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .card .pity { position: absolute; top: 10px; right: 12px; font-family: var(--font-num); font-weight: 700; font-size: 20px; line-height: 1; }
 .card .mini { grid-column: 1 / -1; position: relative; height: 6px; margin-top: 8px; border-radius: 3px; background: var(--bg); }
 .card .mini i { position: absolute; inset: 0 auto 0 0; border-radius: 3px; }
-.card .mini .dot { position: absolute; top: 50%; width: 8px; height: 8px; border-radius: 50%; background: var(--gold-2); box-shadow: 0 0 0 2px var(--surface), 0 0 8px rgba(244,198,86,.8); transform: translate(-50%, -50%); }
+.card .mini .dot { position: absolute; top: 50%; width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: var(--gold-2); box-shadow: 0 0 0 2px var(--surface), 0 0 8px rgba(244,198,86,.8); transform: translate(-50%, -50%); cursor: help; transition: transform .12s; }
+.card .mini .dot::before { content: ""; position: absolute; inset: -8px; border-radius: 50%; }
+.card .mini .dot:hover, .card .mini .dot:focus-visible, .card .mini .dot.on { transform: translate(-50%, -50%) scale(1.5); outline: none; }
+/* costumes are the rare prize: a rose diamond instead of a gold dot */
+.card .mini .dot.costume { width: 10px; height: 10px; border-radius: 2px; background: linear-gradient(135deg, #ffd1f1, var(--rose-prize)); box-shadow: 0 0 0 2px var(--surface), 0 0 10px var(--rose-prize), 0 0 18px rgba(255, 92, 190, .55); transform: translate(-50%, -50%) rotate(45deg); z-index: 1; }
+.card .mini .dot.costume:hover, .card .mini .dot.costume:focus-visible, .card .mini .dot.costume.on { transform: translate(-50%, -50%) rotate(45deg) scale(1.5); }
+.tag.costume { color: var(--rose-prize); background: rgba(255, 92, 190, .12); border-color: color-mix(in srgb, var(--rose-prize) 45%, transparent); }
+.tag.costume .num { background: var(--rose-prize); color: #2a0a1f; }
+.ic img.obj, .card .face img.obj, .portrait img.obj { object-fit: contain; padding: 3px; }
+.tip .cat { display: block; font-size: 10.5px; letter-spacing: .08em; color: var(--muted); }
+.tip.costume { border-color: color-mix(in srgb, var(--rose-prize) 60%, var(--line-2)); }
+.tip.costume b { color: var(--rose-prize); }
+.tip.costume::after { border-color: color-mix(in srgb, var(--rose-prize) 60%, var(--line-2)); }
+.tip.costume .ic { border-color: var(--rose-prize); background: rgba(255, 92, 190, .12); }
+
+/* journey tooltip */
+.tip { position: fixed; z-index: 20; left: 0; top: 0; display: flex; align-items: center; gap: 10px; padding: 8px 12px 8px 8px; max-width: min(280px, calc(100vw - 24px)); background: var(--raise); border: 1px solid color-mix(in srgb, var(--gold) 45%, var(--line-2)); border-radius: 10px; box-shadow: 0 12px 30px rgba(0,0,0,.55); pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity .12s, transform .12s; }
+.tip.show { opacity: 1; transform: none; }
+.tip .ic { width: 36px; height: 36px; }
+.tip b { display: block; font-size: 13px; font-weight: 500; color: var(--gold); line-height: 1.3; }
+.tip span.when { display: block; font-size: 12px; color: var(--muted); font-family: var(--font-num); }
+.tip::after { content: ""; position: absolute; left: var(--arrow, 50%); bottom: -6px; width: 10px; height: 10px; background: var(--raise); border-right: 1px solid color-mix(in srgb, var(--gold) 45%, var(--line-2)); border-bottom: 1px solid color-mix(in srgb, var(--gold) 45%, var(--line-2)); transform: translateX(-50%) rotate(45deg); }
+.tip.below::after { bottom: auto; top: -6px; transform: translateX(-50%) rotate(225deg); }
 .card.current { background: transparent; border-style: dashed; }
 .card.current .face { border-style: dashed; border-color: var(--line-2); }
 .card.current .name { color: var(--muted); }
@@ -332,11 +355,20 @@ tr.gift td { opacity: .5; }
     "물망산": "a-umbrella.png", "머리 조심": "a-heads.png", "잊힌 자": "a-forgotten.png",
     "잊혀진 자": "a-forgotten.png", "발도": "a-drawn.png", "위험한 게임": "a-dangerous.png", "미소 천사": "a-behappy.png",
     "우리": "a-us.png", "광란의 전자음악": "a-realmusic.png", "성공을 향한 첫 걸음": "a-firststep.png",
+    "정화 개시": "a-clearskies.png", "우미츠키": "c-aurelia.webp",
+    "탈차원 가물": "i-warp.webp", "방향처 가물": "i-lost.webp", "진실의 주사위": "i-dice-solid.webp", "기만의 주사위": "i-dice-fab.webp",
+    "가을의 여운-리버리": "l-autumnhaze.webp", "밤하늘의 깃털-리버리": "l-nightplume.webp", "빙글빙글 링코-세트": "l-turbolinko.webp",
+    "토마토 크루즈-리버리": "l-tomatocruise.webp", "하얀 모래의 신기루-리버리": "l-sandymirage.webp",
+    "가을의 여유": "o-autumnvignette.webp", "우주 여행": "o-surfingstars.webp",
+    "방황의 날": "g-dayadrift.webp", "슈퍼 악령 납시오": "g-superspecter.webp", "양 헬리콥터": "g-sheepcopter.webp", "유란": "g-orchid.webp",
+    "적련": "g-scarlet.webp", "징조의 새": "g-harbinger.webp", "토마토 듀오": "g-tomatoduo.webp", "해를 삼킨 그림자": "g-overcast.webp",
   };
   const PAGE = 50;
   const $ = (id) => document.getElementById(id);
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const short = (n) => (n || "").replace(/^(캐릭터|아크|아이템)·/, "");
+  const short = (n) => (n || "").replace(/^(캐릭터|아크|아이템|튜닝 부품|코스튬|글라이딩 날개)·/, "");
+  const category = (n) => { const m = (n || "").match(/^(캐릭터|아크|아이템|튜닝 부품|코스튬|글라이딩 날개)·/); return m ? m[1] : ""; };
+  const isCostume = (n) => category(n) === "코스튬";
   const isDice = (n) => /주사위$/.test(short(n));
   const iconFile = (n) => ICONS[short(n)];
 
@@ -347,7 +379,11 @@ tr.gift td { opacity: .5; }
   try { const b = localStorage.getItem("nte-banner"); if (b in BANNERS) banner = b; } catch (e) {}
   if (location.hash.slice(1) in BANNERS) banner = location.hash.slice(1);
 
-  const img = (n) => (iconFile(n) ? `<img src="icons/${iconFile(n)}" alt="" loading="lazy">` : `<span class="ph">${esc((short(n) || "?").charAt(0))}</span>`);
+  const img = (n) => {
+    const f = iconFile(n);
+    if (!f) return `<span class="ph">${esc((short(n) || "?").charAt(0))}</span>`;
+    return `<img src="icons/${f}" alt="" loading="lazy"${/^[ilg]-/.test(f) ? ' class="obj"' : ""}>`;
+  };
   const pityColor = (p, hard) => { const r = p / hard; return r < 0.55 ? "var(--good)" : r < 0.8 ? "var(--warn)" : "var(--bad)"; };
   function fmtTime(t) {
     const m = t && t.match(/^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})/);
@@ -430,7 +466,7 @@ tr.gift td { opacity: .5; }
     scale += `<span class="end" style="left:100%">${cfg.hard}</span>`;
     $("gauge-scale").innerHTML = scale;
     $("journey").innerHTML = m.journey.length
-      ? `<span>이번 여정의 노란 결과</span>` + m.journey.map((p) => `<span class="tag"><span class="num">${p.pity}</span>${esc(short(p.name))}</span>`).join("")
+      ? `<span>이번 여정의 노란 결과</span>` + m.journey.map((p) => `<span class="tag${isCostume(p.name) ? " costume" : ""}"><span class="num">${p.pity}</span>${esc(short(p.name))}</span>`).join("")
       : `<span>이번 여정에서 아직 노란 결과가 없어요</span>`;
     $("pity-card").style.setProperty("--glow", m.pity / cfg.hard >= 0.8 ? "rgba(242,101,79,.20)" : "rgba(244,198,86,.18)");
 
@@ -449,7 +485,7 @@ tr.gift td { opacity: .5; }
     $("history-sub").textContent = m.pickups.length ? `${m.pickups.length}개 · 막대 위 점은 여정 중 나온 노란 결과` : "";
     const card = (p, cur) => {
       const col = pityColor(p.pity, cfg.hard);
-      const dots = (cur ? m.journey : p.journey).map((j) => `<span class="dot" style="left:${Math.min(j.pity / cfg.hard, 1) * 100}%" title="${j.pity}회: ${esc(short(j.name))}"></span>`).join("");
+      const dots = (cur ? m.journey : p.journey).map((j) => `<button type="button" class="dot${isCostume(j.name) ? " costume" : ""}" style="left:${Math.min(j.pity / cfg.hard, 1) * 100}%" data-name="${esc(j.name)}" data-pity="${j.pity}" data-time="${esc(j.time || "")}" aria-label="${j.pity}회째 ${esc(short(j.name))}"></button>`).join("");
       return `<div class="card${cur ? " current" : ""}">
         <div class="face">${cur ? `<span class="ph">?</span>` : img(p.name)}</div>
         <div class="name has-name">${cur ? "진행 중" : esc(short(p.name))}</div>
@@ -518,6 +554,49 @@ tr.gift td { opacity: .5; }
   }));
   $("prev").onclick = () => { page--; renderLog(); };
   $("next").onclick = () => { page++; renderLog(); };
+
+  // tooltip for journey dots: hover on desktop, tap on phones
+  const tip = document.createElement("div");
+  tip.className = "tip";
+  tip.setAttribute("role", "tooltip");
+  document.body.appendChild(tip);
+  let tipDot = null;
+  function showTip(dot) {
+    if (tipDot && tipDot !== dot) tipDot.classList.remove("on");
+    tipDot = dot;
+    dot.classList.add("on");
+    const name = dot.dataset.name;
+    const cat = category(name);
+    tip.classList.toggle("costume", isCostume(name));
+    tip.innerHTML = `<span class="ic S">${img(name)}</span><span>${cat ? `<span class="cat">${esc(cat)}</span>` : ""}<b>${esc(short(name))}</b><span class="when">${dot.dataset.pity}회째 · ${fmtTime(dot.dataset.time)}</span></span>`;
+    tip.classList.add("show");
+    const r = dot.getBoundingClientRect();
+    const w = tip.offsetWidth, h = tip.offsetHeight;
+    const cx = r.left + r.width / 2;
+    const x = Math.max(12, Math.min(cx - w / 2, innerWidth - w - 12));
+    const below = r.top - h - 12 < 0;
+    tip.classList.toggle("below", below);
+    tip.style.left = x + "px";
+    tip.style.top = (below ? r.bottom + 12 : r.top - h - 12) + "px";
+    tip.style.setProperty("--arrow", cx - x + "px");
+  }
+  function hideTip() {
+    tip.classList.remove("show");
+    if (tipDot) tipDot.classList.remove("on");
+    tipDot = null;
+  }
+  const cards = $("cards");
+  cards.addEventListener("pointerover", (e) => { const d = e.target.closest(".dot"); if (d && e.pointerType === "mouse") showTip(d); });
+  cards.addEventListener("pointerout", (e) => { const d = e.target.closest(".dot"); if (d && e.pointerType === "mouse" && !d.contains(e.relatedTarget)) hideTip(); });
+  cards.addEventListener("focusin", (e) => { const d = e.target.closest(".dot"); if (d) showTip(d); });
+  cards.addEventListener("focusout", hideTip);
+  document.addEventListener("click", (e) => {
+    const d = e.target.closest(".dot");
+    if (d) { e.preventDefault(); tipDot === d && tip.classList.contains("show") ? hideTip() : showTip(d); }
+    else hideTip();
+  });
+  addEventListener("scroll", hideTip, { passive: true });
+  addEventListener("resize", hideTip);
 
   render();
   fetch("data.json", { cache: "no-cache" })
